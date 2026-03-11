@@ -288,6 +288,12 @@ func ParseEncryptedCompact(
 	keyAlgorithms []KeyAlgorithm,
 	contentEncryption []ContentEncryption,
 ) (*JSONWebEncryption, error) {
+	// Limit the number of parts to prevent memory exhaustion from malicious input
+	// with excessive number of "." characters
+	if strings.Count(input, ".") > 100 {
+		return nil, fmt.Errorf("go-jose/go-jose: compact JWE format contains too many parts")
+	}
+
 	parts := strings.Split(input, ".")
 	if len(parts) != 5 {
 		return nil, fmt.Errorf("go-jose/go-jose: compact JWE format must have five parts")

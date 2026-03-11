@@ -327,6 +327,12 @@ func parseSignedCompact(
 	payload []byte,
 	signatureAlgorithms []SignatureAlgorithm,
 ) (*JSONWebSignature, error) {
+	// Limit the number of parts to prevent memory exhaustion from malicious input
+	// with excessive number of "." characters
+	if strings.Count(input, ".") > 100 {
+		return nil, fmt.Errorf("go-jose/go-jose: compact JWS format contains too many parts")
+	}
+
 	parts := strings.Split(input, ".")
 	if len(parts) != 3 {
 		return nil, fmt.Errorf("go-jose/go-jose: compact JWS format must have three parts")
