@@ -1,3 +1,11 @@
+golang-github-go-jose-go-jose (4.0.4-1-deepin1) unstable; urgency=medium
+
+  * Fix CVE-2025-27144: Limit the number of parts in compact JWS/JWE format
+    to prevent memory exhaustion from malicious input with excessive "."
+    characters.
+
+ -- Security Team <security@deepin.org>  Mon, 16 Mar 2026 15:20:00 +0800
+
 golang-github-go-jose-go-jose (4.0.4-1) unstable; urgency=medium
 
   * Team upload
