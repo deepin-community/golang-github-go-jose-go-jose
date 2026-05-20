@@ -1,3 +1,13 @@
+golang-github-go-jose-go-jose (4.0.4-1deepin2) unstable; urgency=medium
+
+  * fix(CVE-2026-34986): prevent panic on KeyUnwrap of empty encrypted
+    key  Decrypting a JWE object could panic if the alg field indicates
+    a key wrapping algorithm and the encrypted_key field is empty. Add
+    length validation in cipher.KeyUnwrap and empty key checks in
+    decryptKey.
+
+ -- deepin-ci-robot <packages@deepin.org>  Wed, 20 May 2026 22:36:52 +0800
+
 golang-github-go-jose-go-jose (4.0.4-1deepin1) unstable; urgency=medium
 
   * fix(CVE-2025-27144): prevent excessive memory consumption in compact
